@@ -1,0 +1,41 @@
+#version 300 es
+
+precision mediump float;
+
+in vec3 n_normal, v_view;
+in highp vec2 textCoord;
+
+out vec4 fragOut_Color;
+
+uniform float shininess;
+uniform float alpha;
+
+uniform vec3 cubeColor;
+uniform vec3 uDiffuseLightColor;
+uniform vec3 uDiffuseLightDirection;
+uniform vec3 uAmbientLightColor;
+
+void main(){
+    float brighten = 0.0;
+    vec3 ccubeColor = cubeColor + vec3(brighten, brighten, brighten);
+
+    vec3 light = normalize(uDiffuseLightDirection);
+
+    vec3 normal = normalize(n_normal);
+    vec3 view = normalize(v_view);
+
+    // diffuse term
+    vec3 diff = max(dot(normal, -light), 0.0) * uDiffuseLightColor * ccubeColor;
+
+    // specular term
+    vec3 refl = 2.0 * normal * dot(normal, -light) + light;
+    vec3 spec = pow(max(dot(refl, view), 0.0), shininess) * uDiffuseLightColor * ccubeColor;
+
+    // ambient term
+    vec3 ambi = uAmbientLightColor * ccubeColor;
+    
+    vec4 lighting = vec4(diff + ambi + (spec*0.5), alpha);
+    
+    fragOut_Color = lighting;
+ 
+}

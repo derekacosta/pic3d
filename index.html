@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Load Model</title>
+    <script src="js/initShader.js"></script>
+    <script src="js/gl-matrix.js"></script>
+    <script src="js/Camera.js"></script>
+    <script src="js/basicModelLibrary.js"></script>
+    <script src="js/run.js"></script>
+    <style>
+        .button {
+            background-color: rgba(10, 10, 10, 0.698); /* Green */
+            border: none;
+            color: rgb(255, 0, 0);
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+            /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 40px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */
+        }
+
+            /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 0px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="myMain();" bgcolor="#000000">
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <!-- <center> -->
+            <p style="font-family:'Courier New', Courier, monospace; color:rgb(250, 90, 90)">
+                    MOVE: { W = forward |
+                    S = back |
+                    A = left |
+                    D = right |
+                    Q = up |
+                    Z = down } <br><br>
+                    LOOK: { U = up |
+                    N = down |
+                    J = right |
+                    K = left } <br><br>
+                    ANIMATE: { R = RESET scene | 
+                    M = start animation |
+                    P = pause/resume animation | L = wireframe} <br><br>
+                    SWITCH CAMERA: { H = helicam |
+                    C = carcam |
+                    F = freeroam cam } <br><br>
+                    SPACEBAR = rotate scene **use at your own risk!
+            </p>
+            <!-- </center> -->
+        </div>
+    </div>
+    <br>
+    <canvas id="surface" width="1480" height="750" style="border:1px dashed; padding:0; margin:auto; display: block"></canvas>
+    <!-- <canvas id="surface" width="550" height="550" style="border:1px dashed; padding:0; margin:auto; display: block"></canvas> -->
+    <center>
+        <br>
+        <button class="button" id="myBtn">VIEW CONTROLS</button>
+        
+    </center>
+    <script>
+        // Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+#version 300 es
+
+precision mediump float;
+
+in vec3 n_normal, v_view;
+in highp vec2 textCoord;
+
+out vec4 fragOut_Color;
+
+uniform sampler2D textureSampler;
+
+void main(){
+    
+    fragOut_Color = texture(textureSampler, vec2(textCoord.s, textCoord.t));
+}
